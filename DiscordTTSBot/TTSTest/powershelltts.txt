@@ -1,0 +1,1 @@
+$filePath="C:\Users\home\source\repos\DiscordTTSBot\DiscordTTSBot\TTSTest\cock.wav";$text="le coq et le cooooooooooooooooooooooooooooq sont tres coooooooqkdioasnofnhbedauyheyikjhndoiuysdhnouiydhnfiudhnfuyshnf";Add-Type -AssemblyName System.Speech;$s=New-Object System.Speech.Synthesis.SpeechSynthesizer;$s.SetOutputToWaveFile($filePath);$s.Speak($text)
