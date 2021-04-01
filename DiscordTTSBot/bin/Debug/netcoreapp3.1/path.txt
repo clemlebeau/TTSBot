@@ -1,0 +1,1 @@
+C:\Users\home\source\repos\DiscordTTSBot\DiscordTTSBot\bin\Debug\netcoreapp3.1\tts\ttsfile.wav

@@ -29,7 +29,7 @@ namespace DiscordTTSBot
             voiceNextConnection = await voiceNext.ConnectAsync(channel);
             //await ctx.Message.CreateReactionAsync(DiscordEmoji.FromName(ctx.Client, ":white_check_mark: "));
 
-            string filePath = @"C:\Users\home\source\repos\DiscordTTSBot\DiscordTTSBot\TTSTest\cock.wav";
+            string filePath = File.ReadAllText("path.txt");//@"C:\Users\home\source\repos\DiscordTTSBot\DiscordTTSBot\TTSTest\cock.wav";
             
             OutputTTS(ctx.RawArgumentString, filePath, true);
 
