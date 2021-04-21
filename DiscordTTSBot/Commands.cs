@@ -30,7 +30,8 @@ namespace DiscordTTSBot
             //await ctx.Message.CreateReactionAsync(DiscordEmoji.FromName(ctx.Client, ":white_check_mark: "));
 
             string filePath = File.ReadAllText("path.txt");//@"C:\Users\home\source\repos\DiscordTTSBot\DiscordTTSBot\TTSTest\cock.wav";
-            
+
+            Console.WriteLine($"Received message: {ctx.RawArgumentString}");
             OutputTTS(ctx.RawArgumentString, filePath, true);
 
             await voiceNextConnection.SendSpeakingAsync(true);
@@ -70,14 +71,16 @@ namespace DiscordTTSBot
             if (File.Exists(path))
                 File.Delete(path);
 
-            Execute($@"$filePath=""{path}"";$text=""{textToSpeech}"";Add-Type -AssemblyName System.Speech;$s=New-Object System.Speech.Synthesis.SpeechSynthesizer;$s.SetOutputToWaveFile($filePath);$s.Speak($text)"); // Embedd text  
+            string command = $@"$filePath=""{path}"";$text=""{textToSpeech}"";Add-Type -AssemblyName System.Speech;$s=New-Object System.Speech.Synthesis.SpeechSynthesizer;$s.SetOutputToWaveFile($filePath);$s.Speak($text)";
+
+            Execute(command); // Embedd text  
 
             void Execute(string command)
             {
-                var cFile = System.IO.Path.GetTempPath() + Guid.NewGuid() + ".ps1";
+                //var cFile = System.IO.Path.GetTempPath() + Guid.NewGuid() + ".ps1";
 
 
-                File.WriteAllText(cFile, command);
+                //File.WriteAllText(cFile, command);
                 var start =
                     new System.Diagnostics.ProcessStartInfo()
                     {
@@ -85,7 +88,8 @@ namespace DiscordTTSBot
                         LoadUserProfile = false,
                         UseShellExecute = false,
                         CreateNoWindow = false,
-                        Arguments = $"-executionpolicy bypass -File {cFile}",
+                        Arguments = $"-c {command}",
+                        //Arguments = $"-executionpolicy bypass -File {cFile}",
                         WindowStyle = System.Diagnostics.ProcessWindowStyle.Maximized
                     };
 
